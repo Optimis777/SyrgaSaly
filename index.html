@@ -18,7 +18,10 @@
     --line:rgba(122,92,30,.35);
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{
+    scroll-behavior:smooth;
+    overflow-x:hidden;
+  }
   body{
     margin:0;
     background:var(--cream);
@@ -205,7 +208,7 @@
     max-width:760px;
     margin:0 auto;
     text-align:center;
-    overflow:visible;
+    overflow:hidden;
   }
   .divider{
     width:120px;
@@ -533,7 +536,7 @@
       Дорогие родственники, братья, сестры,<br>
       друзья!
       <br><br>
-      Приглашаем Вас стать почётным гостем
+      Приглашаем Вас стать почётным гостем на торжественный стол
       <span class="invite-couple">Тамерлан и Гульзада</span>
     </p>
   </section>
@@ -611,7 +614,7 @@
         <label>Ваш ответ</label>
         <div class="rsvp-options">
           <input type="radio" id="opt-yes" name="attend" value="Приду" checked>
-          <label for="opt-yes">Приду </label>
+          <label for="opt-yes">Приду 🎉</label>
 
           <input type="radio" id="opt-pair" name="attend" value="Приду с парой">
           <label for="opt-pair">Приду с парой</label>
