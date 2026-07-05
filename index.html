@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тамерлан & Гульзада — Тойға шақыру</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Marck+Script&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7ee;
+    --cream-deep:#f3ecd9;
+    --ink:#3a3226;
+    --gold:#a9822f;
+    --gold-deep:#7c5c1e;
+    --olive:#5c6a45;
+    --line:rgba(122,92,30,.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .eyebrow{
+    font-family:'Montserrat',sans-serif;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--gold-deep);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    height:100vh;
+    min-height:640px;
+    width:100%;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#fff;
+  }
+  .hero video{
+    position:absolute;
+    top:50%; left:50%;
+    width:100%; height:100%;
+    object-fit:cover;
+    transform:translate(-50%,-50%);
+    z-index:0;
+    filter:saturate(1.02);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,15,5,.35) 0%, rgba(20,15,5,.15) 35%, rgba(20,15,5,.5) 100%);
+    z-index:1;
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    padding:0 24px;
+    animation:riseIn 1.6s ease-out both;
+  }
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(24px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .hero-eyebrow{
+    font-family:'Montserrat',sans-serif;
+    letter-spacing:.35em;
+    text-transform:uppercase;
+    font-size:11px;
+    color:#f1e6c8;
+    margin-bottom:18px;
+  }
+  .hero-names{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:clamp(48px, 11vw, 108px);
+    line-height:1.05;
+    letter-spacing:.01em;
+    margin:0;
+    text-shadow:0 2px 24px rgba(0,0,0,.25);
+  }
+  .hero-and{
+    font-family:'Marck Script', cursive;
+    font-size:clamp(28px,5vw,44px);
+    display:inline-block;
+    color:#f1e6c8;
+    margin:0 14px;
+    vertical-align:middle;
+    position:relative;
+    top:-4px;
+  }
+  .hero-date{
+    margin-top:26px;
+    font-family:'Montserrat',sans-serif;
+    letter-spacing:.22em;
+    font-size:14px;
+    color:#f6efd9;
+  }
+  .hero-date span{ opacity:.6; margin:0 10px;}
+  .scroll-cue{
+    position:absolute;
+    bottom:26px; left:50%;
+    transform:translateX(-50%);
+    z-index:2;
+    width:1px; height:46px;
+    background:rgba(255,255,255,.55);
+  }
+  .scroll-cue::after{
+    content:"";
+    position:absolute; top:0; left:-3px;
+    width:7px; height:7px;
+    border-radius:50%;
+    background:#fff;
+    animation:dropDown 2.2s ease-in-out infinite;
+  }
+  @keyframes dropDown{
+    0%{top:0; opacity:0;}
+    30%{opacity:1;}
+    100%{top:40px; opacity:0;}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{
+    position:relative;
+    padding:96px 24px;
+    max-width:760px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .divider{
+    width:120px;
+    height:auto;
+    opacity:.85;
+    margin:0 auto 34px;
+    display:block;
+  }
+  .divider.flip{ transform:scaleX(-1);}
+
+  /* ---------- INVITATION TEXT ---------- */
+  .invite-text{
+    font-size:clamp(18px,2.4vw,22px);
+    line-height:1.9;
+    color:var(--ink);
+    font-weight:400;
+  }
+  .invite-text .soft{
+    display:block;
+    font-family:'Montserrat',sans-serif;
+    font-size:12px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+    margin-bottom:22px;
+  }
+  .invite-couple{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(30px,4vw,40px);
+    color:var(--gold-deep);
+    margin:26px 0 6px;
+  }
+
+  /* ---------- DECORATIVE SPLASH BAND ---------- */
+  .splash-band{
+    position:relative;
+    padding:0;
+    max-width:100%;
+    height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .splash-band img{
+    height:230px;
+    width:auto;
+    opacity:.9;
+  }
+
+  /* ---------- DETAILS ---------- */
+  .details{
+    background:var(--cream-deep);
+  }
+  .detail-date{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:clamp(34px,5vw,52px);
+    color:var(--ink);
+    margin:6px 0 2px;
+  }
+  .detail-time{
+    font-family:'Montserrat',sans-serif;
+    letter-spacing:.15em;
+    font-size:14px;
+    color:var(--gold-deep);
+    text-transform:uppercase;
+  }
+
+  .timeline{
+    margin:56px 0 0;
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .timeline-row{
+    display:grid;
+    grid-template-columns:110px 24px 1fr;
+    align-items:center;
+    text-align:left;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .timeline-row:last-child{ border-bottom:none;}
+  .timeline-time{
+    font-family:'Montserrat',sans-serif;
+    font-size:15px;
+    letter-spacing:.05em;
+    color:var(--gold-deep);
+    font-weight:500;
+  }
+  .timeline-dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--gold);
+    margin:0 auto;
+  }
+  .timeline-label{
+    font-size:19px;
+    color:var(--ink);
+  }
+
+  /* ---------- LOCATION ---------- */
+  .location-card{
+    margin-top:44px;
+    padding:38px 30px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:4px;
+  }
+  .location-name{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:26px;
+    color:var(--gold-deep);
+    margin:2px 0 12px;
+  }
+  .location-address{
+    font-size:19px;
+    line-height:1.7;
+    margin-bottom:22px;
+  }
+  .map-link{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Montserrat',sans-serif;
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:#fff;
+    background:var(--olive);
+    padding:14px 30px;
+    border-radius:30px;
+    transition:background .25s ease, transform .25s ease;
+  }
+  .map-link:hover{
+    background:var(--gold-deep);
+    transform:translateY(-2px);
+  }
+  .map-link svg{ width:16px; height:16px; flex:none;}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    padding-top:80px;
+    padding-bottom:110px;
+  }
+  .closing-script{
+    font-family:'Marck Script', cursive;
+    font-size:clamp(30px,5vw,46px);
+    color:var(--gold-deep);
+    margin-bottom:10px;
+  }
+  .closing-text{
+    font-size:18px;
+    line-height:1.85;
+    max-width:520px;
+    margin:0 auto;
+  }
+  footer{
+    text-align:center;
+    padding:30px 24px 46px;
+    font-family:'Montserrat',sans-serif;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+    opacity:.7;
+  }
+
+  @media (max-width:560px){
+    section{ padding:70px 20px;}
+    .timeline-row{ grid-template-columns:88px 20px 1fr;}
+    .timeline-label{ font-size:17px;}
+    .splash-band{ height:110px;}
+    .splash-band img{ height:160px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-content{ animation:none;}
+    .scroll-cue::after{ animation:none;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="./assets/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Тойға шақыру</div>
+      <h1 class="hero-names">Тамерлан<span class="hero-and">&amp;</span>Гульзада</h1>
+      <div class="hero-date">12<span>•</span>07<span>•</span>2026</div>
+    </div>
+    <div class="scroll-cue"></div>
+  </div>
+
+  <!-- INVITATION TEXT -->
+  <section>
+    <img class="divider" src="./assets/divider-line.webp" alt="">
+    <p class="invite-text">
+      <span class="soft">Құрметті қонақтар</span>
+      Құрметті ағайын-туыс, бауырлар, құда-жекжат,<br>
+      нағашы-жиен, бөлелер, құрбы-құрдас,<br>
+      дос-жарандар, әріптестер, көршілер!
+      <br><br>
+      Сіз(дер)ді ұлымыз бен қалыншамыз
+      <span class="invite-couple">Тамерлан мен Гульзада</span>
+      үйлену тойына арналған салтанатты ақ дастарханымыздың
+      қадірлі қонағы болуға шақырамыз!
+    </p>
+  </section>
+
+  <div class="splash-band">
+    <img src="./assets/gold-splash.webp" alt="">
+  </div>
+
+  <!-- DETAILS -->
+  <section class="details">
+    <div class="eyebrow">Той күні</div>
+    <div class="detail-date">12 шілде 2026 жыл</div>
+    <div class="detail-time">жексенбі · сағат 17:00-де басталады</div>
+
+    <div class="timeline">
+      <div class="timeline-row">
+        <div class="timeline-time">17:00</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Қонақтардың жиналуы</div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">17:30</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Беташар</div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">18:00</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-label">Той салтанатының ашылуы, дастарханға отырғызу</div>
+      </div>
+    </div>
+
+    <div class="location-card">
+      <div class="eyebrow">Мекен-жайы</div>
+      <div class="location-name">«Адиля»</div>
+      <div class="location-address">
+        Алматы қаласы,<br>
+        Ілияс Жансүгіров көшесі, 283
+      </div>
+      <a class="map-link" href="https://2gis.kz/almaty/firm/70000001020476354" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" stroke="#fff" stroke-width="1.6"/>
+          <circle cx="12" cy="10" r="2.4" stroke="#fff" stroke-width="1.6"/>
+        </svg>
+        2ГИС картасынан қараңыз
+      </a>
+    </div>
+  </section>
+
+  <div class="splash-band">
+    <img src="./assets/gold-cluster.webp" alt="">
+  </div>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="closing-script">Сіздерді күтеміз</div>
+    <p class="closing-text">
+      Тойымызға келуіңіз біз үшін үлкен қуаныш пен құрмет болар еді.
+      Қуанышымызды бөлісуге келіңіздер!
+    </p>
+  </section>
+
+  <footer>Тамерлан &amp; Гульзада · 12.07.2026 · Алматы</footer>
+
+</body>
+</html>
