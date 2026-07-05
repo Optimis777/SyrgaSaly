@@ -557,7 +557,7 @@
     <div class="calendar">
       <div class="calendar-month">Июль 2026</div>
       <div class="calendar-grid">
-        <div class="dow">Пн</div><div class="dow">Вт</div><div class="dow">С��</div><div class="dow">Чт</div><div class="dow">Пт</div><div class="dow">Сб</div><div class="dow">Вс</div>
+        <div class="dow">Пн</div><div class="dow">Вт</div><div class="dow">Ср</div><div class="dow">Чт</div><div class="dow">Пт</div><div class="dow">Сб</div><div class="dow">Вс</div>
 
         <div class="day muted">29</div><div class="day muted">30</div>
         <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div>
@@ -677,7 +677,6 @@
   });
 
   // ---- RSVP: sends data directly to Google Sheet via Google Apps Script ----
-  // ---- Данные отправляются напрямую в Google Таблицу ----
   var GOOGLE_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzxPCUIzyRY0469Sq9tAsold8izXnIogMCdbDBy79q0xTyfW0scDAfD0Xm_ng4_IMP0/exec";
 
   document.getElementById('rsvpForm').addEventListener('submit', function(e){
@@ -685,20 +684,15 @@
     var name = document.getElementById('guestName').value.trim();
     var answer = document.querySelector('input[name="attend"]:checked').value;
 
-    var data = {
-      name: name,
-      answer: answer,
-      timestamp: new Date().toISOString()
-    };
+    // Отправляем как FormData (совместимо с Google Apps Script)
+    var data = new FormData();
+    data.append('guestName', name);
+    data.append('attend', answer);
 
     // Отправка данных через Google Apps Script
     fetch(GOOGLE_APPS_SCRIPT, {
       method: "POST",
-      mode: "no-cors",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
+      body: data
     }).then(function(){
       // Показываем сообщение об успехе
       document.getElementById('rsvpSuccess').classList.add('show');
