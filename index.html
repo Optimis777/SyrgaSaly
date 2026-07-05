@@ -557,12 +557,12 @@
     <div class="calendar">
       <div class="calendar-month">Июль 2026</div>
       <div class="calendar-grid">
-        <div class="dow">Пн</div><div class="dow">Вт</div><div class="dow">Ср</div><div class="dow">Чт</div><div class="dow">Пт</div><div class="dow">Сб</div><div class="dow">Вс</div>
+        <div class="dow">Пн</div><div class="dow">Вт</div><div class="dow">С��</div><div class="dow">Чт</div><div class="dow">Пт</div><div class="dow">Сб</div><div class="dow">Вс</div>
 
         <div class="day muted">29</div><div class="day muted">30</div>
         <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div>
 
-        <div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div <div class="day today">11</div>
+        <div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day today">11</div>
        
         <div class="day">12</div>
         <div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div>
@@ -676,43 +676,39 @@
     }
   });
 
-  // ---- RSVP: sends the answer straight into a Google Form, ----
-  // ---- so every response lands in a Google Sheet automatically. ----
-  //
-  // HOW TO CONNECT (5 minutes, one-time):
-  // 1. Go to forms.google.com -> create a new form with 2 questions:
-  //    "Имя" (Short answer) and "Ответ" (Short answer or Multiple choice).
-  // 2. Click the 3-dot menu -> "Get pre-filled link", fill in test values
-  //    for both fields and click "Get link".
-  // 3. That link looks like:
-  //    https://docs.google.com/forms/d/e/FORM_ID/viewform?entry.111=Имя&entry.222=Ответ
-  //    - copy FORM_ID into GOOGLE_FORM_ACTION below (keep /formResponse at the end)
-  //    - copy the two entry.NNNN numbers into ENTRY_NAME and ENTRY_ANSWER below
-  // 4. Open the form's "Responses" tab -> click the green Sheets icon to
-  //    create a linked Google Sheet. Every submission will appear there.
-  var GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSe0s50mHRmjiNH31uJNzokqq7UDZL3bpEwBfMQZ9Wre3yMFfQ/formResponse";
-  var ENTRY_NAME   = "entry.1160522079"; // <- replace with your "Имя" field ID
-  var ENTRY_ANSWER = "entry.338076479"; // <- replace with your "Ответ" field ID
+  // ---- RSVP: sends data directly to Google Sheet via Google Apps Script ----
+  // ---- Данные отправляются напрямую в Google Таблицу ----
+  var GOOGLE_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzxPCUIzyRY0469Sq9tAsold8izXnIogMCdbDBy79q0xTyfW0scDAfD0Xm_ng4_IMP0/exec";
 
   document.getElementById('rsvpForm').addEventListener('submit', function(e){
     e.preventDefault();
     var name = document.getElementById('guestName').value.trim();
     var answer = document.querySelector('input[name="attend"]:checked').value;
 
-    var data = new FormData();
-    data.append(ENTRY_NAME, name);
-    data.append(ENTRY_ANSWER, answer);
+    var data = {
+      name: name,
+      answer: answer,
+      timestamp: new Date().toISOString()
+    };
 
-    // "no-cors" is required by Google Forms; we can't read the response,
-    // so we just show the thank-you message right away.
-    fetch(GOOGLE_FORM_ACTION, {
+    // Отправка данных через Google Apps Script
+    fetch(GOOGLE_APPS_SCRIPT, {
       method: "POST",
       mode: "no-cors",
-      body: data
-    }).catch(function(){ /* still show thanks even if offline */ });
-
-    document.getElementById('rsvpSuccess').classList.add('show');
-    document.getElementById('rsvpForm').reset();
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then(function(){
+      // Показываем сообщение об успехе
+      document.getElementById('rsvpSuccess').classList.add('show');
+      document.getElementById('rsvpForm').reset();
+    }).catch(function(error){
+      // Даже при ошибке показываем спасибо (данные могут быть отправлены)
+      console.log('Ошибка отправки:', error);
+      document.getElementById('rsvpSuccess').classList.add('show');
+      document.getElementById('rsvpForm').reset();
+    });
   });
 </script>
 
