@@ -181,26 +181,48 @@
     text-shadow:0 2px 8px rgba(0,0,0,.4);
   }
   .hero-date span{ opacity:.7; margin:0 10px;}
+  
   .scroll-cue{
     position:absolute;
-    bottom:26px; left:50%;
+    bottom:50px; left:50%;
     transform:translateX(-50%);
     z-index:2;
-    width:1px; height:46px;
-    background:rgba(255,255,255,.55);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    animation:floatBounce 2.5s ease-in-out infinite;
   }
-  .scroll-cue::after{
-    content:"";
-    position:absolute; top:0; left:-3px;
-    width:7px; height:7px;
-    border-radius:50%;
-    background:#fff;
-    animation:dropDown 2.2s ease-in-out infinite;
+  .scroll-text{
+    font-family:'Montserrat',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#fdf9f0;
+    text-shadow:0 2px 8px rgba(0,0,0,.4);
+    opacity:0.85;
   }
-  @keyframes dropDown{
-    0%{top:0; opacity:0;}
-    30%{opacity:1;}
-    100%{top:40px; opacity:0;}
+  .scroll-line{
+    width:1px; 
+    height:30px;
+    background:rgba(255,255,255,.6);
+  }
+  .scroll-arrow{
+    width:0;
+    height:0;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    border-top:8px solid rgba(255,255,255,.8);
+    animation:arrowBounce 1.2s ease-in-out infinite;
+  }
+  @keyframes floatBounce{
+    0%, 100%{transform:translateX(-50%) translateY(0);}
+    50%{transform:translateX(-50%) translateY(8px);}
+  }
+  @keyframes arrowBounce{
+    0%, 100%{opacity:0.5; transform:translateY(-4px);}
+    50%{opacity:1; transform:translateY(4px);}
   }
 
   /* ---------- SECTION SHELL ---------- */
@@ -501,7 +523,7 @@
 
   @media (prefers-reduced-motion: reduce){
     .hero-content{ animation:none;}
-    .scroll-cue::after{ animation:none;}
+    .scroll-cue{ animation:none;}
   }
 
   /* ---------- FALLING PETALS ---------- */
@@ -546,7 +568,11 @@
       <h1 class="hero-names">Темирлан<span class="hero-and">&amp;</span>Гульзада</h1>
       <div class="hero-date">11<span>•</span>07<span>•</span>2026</div>
     </div>
-    <div class="scroll-cue"></div>
+    <div class="scroll-cue">
+      <div class="scroll-text">Листайте вниз</div>
+      <div class="scroll-line"></div>
+      <div class="scroll-arrow"></div>
+    </div>
   </div>
 
   <!-- INVITATION TEXT -->
